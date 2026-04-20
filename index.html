@@ -1,16 +1,203 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categorias de Juegos</title>
+    <title>GameVault | Plataforma de Videojuegos Multiplataforma</title>
+    <meta name="description" content="Tu base de datos definitiva de juegos para PS4, PS5 y Xbox. Estrategias, trucos y comunidad.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Estilos Principales -->
+    <link rel="stylesheet" href="globals.css">
+    <!-- Favicon Placeholder -->
+    <link rel="icon" href="https://via.placeholder.com/32" type="image/x-icon">
 </head>
-
 <body>
-    <h1>Juegos</h1>
-    <p>Selecciona una categoria</p>
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <header>
+        <nav class="navbar" aria-label="Navegación principal">
+            <a href="#" class="logo">GAMEVAULT</a>
+            
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#juegos">Juegos</a></li>
+                <li><a href="#estrategias">Estrategias</a></li>
+                <li><a href="#comunidad">Comunidad</a></li>
+            </ul>
+
+            <div class="search-box">
+                <input type="text" placeholder="Buscar títulos..." aria-label="Buscar juegos">
+                <button type="button" class="btn-search" style="background:none; border:none; color:white; cursor:pointer;">🔍</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- SECCIÓN HERO -->
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <span class="hero-label">Juego de la Semana</span>
+                <!-- Antigravity: JuegoDestacado_Titulo -->
+                <h1>ELDEN RING: SHADOW OF THE ERDTREE</h1>
+                <p>Explora las tierras sombrías y descubre los secretos de Miquella en esta épica expansión.</p>
+                <div class="hero-btns">
+                    <a href="#" class="btn btn-primary">Ver Detalles</a>
+                    <a href="#" class="btn" style="border: 1px solid white; margin-left: 1rem;">Trailer</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATÁLOGO DE JUEGOS -->
+        <section id="juegos" class="section-container">
+            <h2 class="section-title">Catálogo Destacado</h2>
+            
+            <div class="game-grid">
+                <!-- Antigravity: Loop Juegos -->
+                
+                <!-- Ejemplo 1 -->
+                <article class="game-card">
+                    <div class="card-img-wrapper">
+                        <!-- Antigravity: Juego_Imagen -->
+                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?q=80&w=2071&auto=format&fit=crop" alt="The Last of Us Part II">
+                    </div>
+                    <div class="card-info">
+                        <span class="badge badge-ps">PS5</span>
+                        <!-- Antigravity: Juego_Titulo -->
+                        <h3>The Last of Us Part II</h3>
+                        <!-- Antigravity: Juego_Descripcion_Corta -->
+                        <p>Una historia emocional de venganza y redención en un mundo post-pandémico.</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </article>
+
+                <!-- Ejemplo 2 -->
+                <article class="game-card">
+                    <div class="card-img-wrapper">
+                        <!-- Antigravity: Juego_Imagen -->
+                        <img src="https://images.unsplash.com/photo-1605979257913-1704eb7b6246?q=80&w=2070&auto=format&fit=crop" alt="Halo Infinite">
+                    </div>
+                    <div class="card-info">
+                        <span class="badge badge-xbox">XBOX SERIES X</span>
+                        <!-- Antigravity: Juego_Titulo -->
+                        <h3>Halo Infinite</h3>
+                        <!-- Antigravity: Juego_Descripcion_Corta -->
+                        <p>El Jefe Maestro regresa para enfrentarse a su enemigo más despiadado.</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </article>
+
+                <!-- Ejemplo 3 -->
+                <article class="game-card">
+                    <div class="card-img-wrapper">
+                        <!-- Antigravity: Juego_Imagen -->
+                        <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?q=80&w=1957&auto=format&fit=crop" alt="Ghost of Tsushima">
+                    </div>
+                    <div class="card-info">
+                        <span class="badge badge-ps">PS4 / PS5</span>
+                        <!-- Antigravity: Juego_Titulo -->
+                        <h3>Ghost of Tsushima</h3>
+                        <!-- Antigravity: Juego_Descripcion_Corta -->
+                        <p>Protege la isla de Tsushima como el último samurái en pie.</p>
+                        <a href="#" class="btn btn-primary">Ver más</a>
+                    </div>
+                </article>
+
+                <!-- Fin de Loop -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN ESTRATEGIAS -->
+        <section id="estrategias" class="strategies">
+            <h2 class="section-title">Estrategias y Guías</h2>
+            
+            <div class="strategy-list">
+                <!-- Antigravity: Loop Estrategias -->
+                <article class="strategy-item">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop" alt="Estrategia 1">
+                    <div class="strategy-info">
+                        <!-- Antigravity: Estrategia_Titulo -->
+                        <h3>Guía de Supervivencia: Warzone 2.0</h3>
+                        <!-- Antigravity: Estrategia_Autor -->
+                        <p>Por: <span style="color: var(--ps-blue);">ProGamer_X</span></p>
+                        <p>Descubre los mejores puntos de aterrizaje y configuraciones de armas.</p>
+                    </div>
+                </article>
+
+                <article class="strategy-item">
+                    <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?q=80&w=2070&auto=format&fit=crop" alt="Estrategia 2">
+                    <div class="strategy-info">
+                        <!-- Antigravity: Estrategia_Titulo -->
+                        <h3>Localización de Coleccionables - God of War</h3>
+                        <!-- Antigravity: Estrategia_Autor -->
+                        <p>Por: <span style="color: var(--xbox-green);">KratosFan99</span></p>
+                        <p>Mapa completo con todos los cuervos de Odín y cofres de Nornir.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SISTEMA DE COMENTARIOS -->
+        <section id="comunidad" class="comments-section">
+            <h2 class="section-title">Comunidad</h2>
+            
+            <form id="commentForm" class="comment-form">
+                <h3>Deja tu Opinión</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <input type="text" placeholder="Tu Nombre" aria-label="Nombre" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.8rem; border-radius: 4px;">
+                    <input type="email" placeholder="Tu Email" aria-label="Email" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.8rem; border-radius: 4px;">
+                </div>
+                <textarea placeholder="Escribe tu comentario aquí..." aria-label="Comentario"></textarea>
+                <button type="submit" class="btn btn-primary">Publicar Comentario</button>
+            </form>
+
+            <div class="comments-list">
+                <h3 style="margin-bottom: 1.5rem;">Comentarios Recientes</h3>
+                
+                <!-- Antigravity: Loop Comentarios -->
+                <div class="comment">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <!-- Antigravity: Comentario_Autor -->
+                        <strong>ShadowHunter</strong>
+                        <!-- Antigravity: Comentario_Fecha -->
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">Hace 2 horas</span>
+                    </div>
+                    <!-- Antigravity: Comentario_Contenido -->
+                    <p>¡La guía de Warzone me ayudó muchísimo a mejorar mi K/D ratio! Gracias.</p>
+                </div>
+                
+                <div class="comment">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <strong>XboxGamer123</strong>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">Ayer</span>
+                    </div>
+                    <p>¿Alguien sabe si van a subir estrategias para el nuevo DLC de Forza?</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- WIDGET STATUS DE RED -->
+    <aside class="network-status" aria-label="Estado de los servicios de red">
+        <div class="status-item">
+            <span class="status-indicator status-online"></span>
+            <span>PlayStation Network: <strong>ONLINE</strong></span>
+        </div>
+        <div class="status-item">
+            <span class="status-indicator status-online"></span>
+            <span>Xbox Live: <strong>ONLINE</strong></span>
+        </div>
+        <div class="status-item">
+            <span class="status-indicator status-offline"></span>
+            <span>Nintendo Switch Online: <strong>OFFLINE</strong></span>
+        </div>
+    </aside>
+
+    <footer style="padding: 2rem 10%; background: #050507; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+        <p>&copy; 2026 GameVault - Desarrollado para el Proyecto CategoriaJuegos_AW</p>
+    </footer>
 
 </body>
-
 </html>
