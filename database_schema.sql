@@ -1,45 +1,64 @@
--- Archivo: database_schema.sql
--- Script MySQL para una aplicación de valoración de juegos de PlayStation
+-- APW_Juegos — Complete Database Schema for MariaDB
+-- Run this file once to set up the database
 
-CREATE DATABASE IF NOT EXISTS playstation_db;
-USE playstation_db;
+CREATE DATABASE IF NOT EXISTS apw_juegos CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE apw_juegos;
 
--- Tabla 1: Juegos
-CREATE TABLE games (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    platform VARCHAR(50) NOT NULL, -- PS4, PS5, etc.
+-- ─── USERS ────────────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS users (
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    username      VARCHAR(50)  NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    avatar        VARCHAR(255) DEFAULT 'default_avatar.png',
+    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+-- ─── GAMES ────────────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS games (
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    title        VARCHAR(255) NOT NULL,
+    platform     ENUM('PS4','PS5','Xbox') NOT NULL,
+    developer    VARCHAR(100),
     release_year INT,
-    developer VARCHAR(100),
-    genre VARCHAR(50)
-);
+    genre        VARCHAR(100),
+    description  TEXT,
+    image        VARCHAR(255) DEFAULT 'default_cover.png',
+    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
 
--- Tabla 2: Valoraciones
--- Relación 1:N (Un juego puede tener muchas valoraciones)
-CREATE TABLE ratings (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    game_id INT NOT NULL,
-    user_name VARCHAR(100) NOT NULL,
-    score INT NOT NULL CHECK (score BETWEEN 1 AND 5), -- Puntuación del 1 al 5
-    comment TEXT,
-    rating_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE
-);
+-- ─── REVIEWS ──────────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS reviews (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    game_id    INT NOT NULL,
+    user_id    INT NOT NULL,
+    rating     INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    comment    TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
 
--- Inserción de registros iniciales
-INSERT INTO games (title, platform, release_year, developer, genre) VALUES 
-('The Last of Us Part II', 'PS4', 2020, 'Naughty Dog', 'Acción-Aventura'),
-('God of War Ragnarök', 'PS5', 2022, 'Santa Monica Studio', 'Acción-Aventura'),
-('Bloodborne', 'PS4', 2015, 'FromSoftware', 'Accion RPG'),
-('Horizon Forbidden West', 'PS5', 2022, 'Guerrilla Games', 'Mundo Abierto'),
-('Ghost of Tsushima', 'PS4', 2020, 'Sucker Punch', 'Acción');
+-- ─── CHAT MESSAGES ────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS chat_messages (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    game_id    INT NOT NULL,
+    user_id    INT NOT NULL,
+    message    TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (game_id) REFERENCES games(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
 
-INSERT INTO ratings (game_id, score, comment, user_name) VALUES 
-(1, 5, 'Impactante y emocionante hasta el final.', 'Alejandro'),
-(1, 4, 'Gráficos increíbles, aunque la trama es algo divisiva.', 'Maria92'),
-(2, 5, 'Mejor que el anterior en todo. Una épica total.', 'KratosFan'),
-(3, 5, 'Dificultad justa y una ambientación gótica suprema.', 'Hunter_V'),
-(4, 4, 'Visualmente es lo más puntero de PS5.', 'TechGeek'),
-(5, 5, 'El sistema de combate con katana es perfecto.', 'SamuraiX'),
-(5, 5, 'Una de las mejores direcciones de arte que he visto.', 'Alejandro');
+-- ─── SEED DATA ─────────────────────────────────────────────────────────────────
+-- Default admin user  (password: admin123)
+INSERT INTO users (username, password_hash) VALUES
+('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi')
+ON DUPLICATE KEY UPDATE username = username;
 
+INSERT INTO games (title, platform, developer, release_year, genre, description, image) VALUES
+('The Last of Us Part II', 'PS4', 'Naughty Dog',       2020, 'Acción-Aventura', 'Una historia épica de supervivencia, amor y venganza en un mundo post-apocalíptico.', 'thelastofus2.png'),
+('God of War Ragnarök',    'PS5', 'Santa Monica Studio',2022, 'Acción-Aventura', 'Kratos y Atreus se enfrentan al apocalipsis nórdico en esta épica aventura.',          'godofwar.png'),
+('Bloodborne',             'PS4', 'FromSoftware',       2015, 'Acción RPG',      'Explora la oscura ciudad de Yharnam en un mundo gótico lleno de bestias y secretos.',     'bloodborne.png'),
+('Horizon Forbidden West', 'PS5', 'Guerrilla Games',    2022, 'Mundo Abierto',   'Aloy continúa su viaje descubriendo los secretos del oeste prohibido.',                  'horizonforbiddenwest.png'),
+('Ghost of Tsushima',      'PS4', 'Sucker Punch',       2020, 'Acción',          'Conviértete en el Ghost mientras defiendes Tsushima contra la invasión mongola.',          'ghostoftsushima.png')
+ON DUPLICATE KEY UPDATE title = title;
